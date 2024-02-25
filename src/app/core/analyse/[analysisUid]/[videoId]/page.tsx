@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Progress } from "../../../../../components/ui/progress"
 import { getNamedMiddlewareRegex } from "next/dist/shared/lib/router/utils/route-regex"
+import { SERVER_URL } from "../../../../constants"
 
 export default function App({
     params
@@ -28,6 +29,14 @@ export default function App({
         recording_tempo : 20,
         vocal_tempo : 15 
     });
+
+    (setAnalysis => {
+        fetch(`${SERVER_URL}/analyse/${params.videoId}/1`).
+        then (resp => resp.json()).
+        then (data => {
+            setAnalysis(data)
+        })
+    })(setAnalysis)
 
     return (
         <div className="my-container px-14">

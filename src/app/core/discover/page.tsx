@@ -10,9 +10,9 @@ export default function Discover() {
     return (
         <Container>
             <h1 className="subtitle text-8xl p-8">Discover!</h1>
-            <Carousel title="POP & YOU!" genre="pop"></Carousel>
             <Carousel title="BOP 2 HIPHOP" genre="hip_hop"></Carousel>
             <Carousel title="THE ROCK" genre="rock"></Carousel>
+            <Carousel title="POP & YOU!" genre="pop"></Carousel>
         </Container>
     )
 }
