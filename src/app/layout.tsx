@@ -30,6 +30,7 @@ function Head() {
       <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
       <link rel="stylesheet" href="assets/css/blobz.min.css" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/favicon.ico" sizes="any"/>
   </head>
 }
 

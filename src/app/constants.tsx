@@ -1,1 +1,1 @@
-export const SERVER_URL = "http://0.0.0.0:3000/"
+export const SERVER_URL = "https://01c3-2a09-bac5-3aed-a8c-00-10d-9.ngrok-free.app"

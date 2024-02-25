@@ -15,12 +15,12 @@ export default function main({
 
 function NavBar() {
   return ( <>
-    <div className="flex nav py-8 px-14 flex-row-reverse border-b-2 border-black">
+    <div className="flex nav py-8 px-14 flex-row-reverse border-b-2 border-blackk">
       <div className="">
         <TextButton content="Search" url="/"/>
         <TextButton content="Discover" url="/core/discover/"/>
         <TextButton content="Log In" url="/core/login" />
-        <button className="my-nav-font-size font-inter mx-1 font-light bg-black hover:bg-gray-900 text-white font-bold py-1 px-5 rounded-full">
+        <button className="my-nav-font-size font-inter mx-1 font-light bg-blackk hover:bg-gray-900 text-white font-bold py-1 px-5 rounded-full">
           Sign Up
         </button>
       </div>

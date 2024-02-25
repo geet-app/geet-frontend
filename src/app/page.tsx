@@ -40,7 +40,7 @@ function NavBar() {
       <div className="">
         <TextButton content="Discover" url="/core/discover/"/>
         <TextButton content="Log In" url="/core/login/"/>
-        <button className="my-nav-font-size font-inter font-light bg-black hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-full">
+        <button className="my-nav-font-size font-inter font-light bg-blackk hover:bg-gray-900 text-white font-bold py-3 px-10 rounded-full">
           Sign Up
         </button>
       </div>

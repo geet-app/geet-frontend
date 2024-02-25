@@ -10,6 +10,8 @@
     --background-color: #EDECE1;
     --primary-color: #CE2D4F;
     --secondary-color: #CE6D8B;
+    --blackk: #320B13;
+    --blue: #5762D5;
 
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -91,13 +93,13 @@
 
   .graphic img {
     object-fit: cover;
-    width: 40vw;
+    width: 45vw;
     height: 100vh;
   }
 
   .splash-screen {
     width: 50vw;
-    margin-left: 40vw;
+    margin-left: 45vw;
     padding: 8vh 5vw;
     font-size: 15vh;
     line-height: 15vh;
@@ -112,7 +114,7 @@
   .splash-font {
     font-weight: 900;
     color: var(--secondary-color);
-    text-shadow: 4px 4px #000;
+    text-shadow: 4px 4px var(--blackk);
   }
 
   .title-font {
@@ -129,14 +131,14 @@
     font-size: 3vh;
     line-height: normal;
     width: 40vw;
-    padding: 1rem 4rem;
+    padding: 1rem 2rem;
     border-radius: 10rem;
     background-color:#DBD9C2;
   }
 
   .search-bar-holder {
     top: 72vh;
-    left: 45vw;
+    left: 50vw;
   }
 
   .title-drop {
@@ -145,7 +147,7 @@
     font-family: "Poppins", sans-serif;
     font-weight:700;
     color: var(--primary-color);
-    text-shadow: 2px 2px #000;
+    text-shadow: 2px 2px var(--blackk);
     padding: 2.5vh 3vw;
     cursor: pointer;
   }
@@ -155,12 +157,13 @@
     font-family: "Poppins", sans-serif;
     font-weight:800;
     color: var(--secondary-color);
-    text-shadow: 2px 2px #000;
+    text-shadow: 2px 2px var(--blackk);
     cursor: pointer;
   }
 
   .my-nav-font-size {
     font-size: 2.5vh;
+    color: var(--blackk);
   }
 
   .my-container {
@@ -223,11 +226,11 @@
 }
 
 .hip_hop-color {
-    color: #33CA7F;
+    color: var(--blue);
   }
 
   .rock-color {
-    color: #70B8DE;
+    color: #33CA7F;
   }
 *:focus {
   outline: none;
@@ -363,3 +366,64 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 } 
+
+.bg-blackk {
+  background-color: var(--blackk);
+}
+
+.subsubtitle {
+    font-size: 4vh;
+    line-height: 8vh;
+    font-family: "Poppins", sans-serif;
+    font-weight:800;
+    color: var(--blue);
+    text-shadow: 1px 1px var(--blackk);
+    cursor: pointer;
+}
+
+.border-blackk {
+  border-color: var(--blackk);
+}
+
+.progress-bar-nonabs {
+  width: 94vw;
+  bottom: 5vh;
+  left: 3vw;
+}
+
+.my-para {
+  font-size: 2.5vh;
+}
+
+.yeehaw {
+  font-size: 4vh !important;
+  color: #000;
+}
+
+.shade {
+
+    text-shadow: 1px 1px var(--blackk);
+}
+
+.section-head {
+  font-family: 'poppins';
+  color: #fff;
+  font-weight: 800;
+  font-size: 3vh;
+  line-height: 4vh;
+}
+
+.info {
+  font-style: italic;
+  font-size: 2vh;
+  color: #fff;
+}
+
+.jury {
+  font-size: 1.8vh;
+  color: #fff;
+}
+
+.iamsocool {
+  font-size: 2.2vh;
+}

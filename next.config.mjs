@@ -5,7 +5,8 @@ const nextConfig = {
             "i.ytimg.com",
             "lh3.googleusercontent.com",
             "cdns-images.dzcdn.net",
-            "interactive-examples.mdn.mozilla.net"
+            "interactive-examples.mdn.mozilla.net",
+            "thepaciellogroup.github.io"
         ]
     }
 };
