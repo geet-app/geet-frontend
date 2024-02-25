@@ -17,6 +17,8 @@ Aenean augue dolor, feugiat sit amet dapibus id,
 maximus ut erat.
 Interdum et malesuada fames ac ante ipsum primis in faucibus.`
 
+var global_timeSync = []
+var global_currentTime = 0
 export default function App({
     params
 }: {
@@ -26,21 +28,32 @@ export default function App({
 }) {
     let [bgColor, setBgColor] = useState("#434343")
     let [lyrics, setLyrics] = useState(TEMPLATE_DATA)
-    let [timeSync, setTimeSync] = useState([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+    let [timeSync, setTimeSync] = useState(Array(57).fill(0))
     let [currentTime, setCurrentTime] = useState(0)
     let [songProgress, setSongProgress] = useState(0)
     let [done, setDone] = useState(0);
 
-    ((setBgColor: any, setLyrics: any, setTimeSync: any, id: string) => {
+    (async (setBgColor: any, setLyrics: any, setTimeSync: any, id: string, setDone, timeSync) => {
+        if (done != 0) {
+            return;
+        }
         fetch(`${SERVER_URL}/lyric/${id}`).
             then(resp => resp.json()).
             then(data => {
-                console.log("HELOO FROM THE OTHERSIDE")
                 setBgColor(data.bgColor)
                 setLyrics(data.lyrics)
-                setTimeSync(data.timeSync)
+                var dddd = data.timeSync.slice()
+                for (let idx in data.timeSync) {
+                    dddd[idx] = parseInt(data.timeSync[idx])
+                }
+                setTimeSync(dddd)
+                console.log(dddd)
+                console.log(timeSync)
+                global_timeSync = dddd
+                console.log(global_timeSync)
+                setDone(1)
             })
-    })(setBgColor, setLyrics, setTimeSync, params.id)
+    })(setBgColor, setLyrics, setTimeSync, params.id, setDone, timeSync)
 
     return (<>
         <SongPlayer id={params.id} setSongProgress={setSongProgress} bgColor={bgColor} setCurrentTime={setCurrentTime} timeSync={timeSync} currentTime={currentTime} />
@@ -70,7 +83,31 @@ function SongPlayer({
     let [artist, setArtist] = useState("John Doe");
     let [done, setDone] = useState(0);
 
-    (async (setThumbnail: any, setTitle: any, setArtist: any, setAudioSrc: any, donestate: any) => {
+    let [audioElement, setAudioElement] = useState(Array(1).fill(null));
+
+    function updateProgress(setSongProgress: any, setCurrentTime: any) {
+        var audioPlayer = document.getElementById("player")
+        global_currentTime = audioPlayer.currentTime
+        setSongProgress(audioPlayer.currentTime / audioPlayer.duration * 100)
+    }
+
+    function syncLyrics(timeSync: any, currentTime: any) {
+        let currentItem: number = 0;
+        for (let idx in global_timeSync) {
+            if (global_timeSync[idx] > global_currentTime) {
+                currentItem = idx;
+                break;
+            }
+        }
+        console.log(global_currentTime, global_timeSync)
+        let id = "line-" + currentItem.toString()
+        document.getElementById(id).classList.add("focus")
+        document.getElementById(id).scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+    (async (setThumbnail: any, setTitle: any, setArtist: any, setAudioElement: any, syncLyrics:any, updateProgress:any, donestate: any, setSongProgress:any, setCurrentTime:any, timeSync:any, currentTime:any) => {
         [done, setDone] = donestate
         if (done != 0) {
             return
@@ -81,46 +118,27 @@ function SongPlayer({
         fetch(`${SERVER_URL}/song/${id}`).
             then(resp => resp.json()).
             then(data => {
+                console.log(data.audio)
                 setThumbnail(data.thumbnail);
                 setTitle(data.title)
                 setArtist(data.artist)
-                setAudioSrc(data.audio)
+                setAudioElement([<audio id="player" onTimeUpdate={() => {
+                        updateProgress(setSongProgress, setCurrentTime)
+                        syncLyrics(timeSync, currentTime)
+                    }}>
+                        <source src={SERVER_URL +"/"+ data.audio} type="audio/mpeg" />
+                    </audio>])
             })
-    })(setThumbnail, setTitle, setArtist, setAudioSrc, [done, setDone])
+    })(setThumbnail, setTitle, setArtist, setAudioElement, syncLyrics, updateProgress, [done, setDone], setSongProgress, setCurrentTime, timeSync, currentTime)
 
-    function updateProgress(setSongProgress: any, setCurrentTime: any) {
-        var audioPlayer = document.getElementById("player")
-        setSongProgress(audioPlayer.currentTime / audioPlayer.duration * 100)
-        setCurrentTime(audioPlayer.currentTime)
-    }
-
-    function syncLyrics(timeSync: any, currentTime: any) {
-        let currentItem: number = 0;
-        for (let idx in timeSync) {
-            if (timeSync[idx] > currentTime) {
-                currentItem = idx;
-                break;
-            }
-        }
-        let id = "line-" + currentItem.toString()
-        document.getElementById(id).classList.add("focus")
-        document.getElementById(id).scrollIntoView({
-            behavior: "smooth"
-        });
-    }
-
-
+    
+        
     return (
         <div className="rounded-lg music-player p-8" style={{ backgroundColor: bgColor }}>
             <Image className="rounded-lg mb-6" src={thumbnail} alt="album cover" width={420} height={420} />
             <h4>{title}</h4>
             <h5>By, {artist}</h5>
-            <audio id="player" onTimeUpdate={() => {
-                updateProgress(setSongProgress, setCurrentTime)
-                syncLyrics(timeSync, currentTime)
-            }}>
-                <source src={audioSrc} type="audio/mpeg" />
-            </audio>
+            {audioElement}
         </div>)
 }
 
