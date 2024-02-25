@@ -41,7 +41,7 @@ export default function App({
     return (
         <div className="my-container px-14">
             <h1 className="subtitle text-8xl">Analysis</h1>
-            <h3 className="font-inter yeehaw pt-4 pb-8 font-bold">You scored <span className=" shade font-black rock-color">{analysis.netscore}</span>/10 <br/><span className="font-medium text-3xl">on the song</span><br/> {analysis.title}, By <span className="underline">{analysis.artist}</span></h3>
+            <h3 className="font-inter yeehaw pt-4 pb-8 font-bold">You scored <span className=" shade font-black rock-color">{Math.round(analysis.netscore).toString()}</span>/10 <br/><span className="font-medium text-3xl">on the song</span><br/> Skyfall, By <span className="underline">Adele</span></h3>
             <h2 className="subsubtitle">Lets first listen and compare</h2>
             <Para>Here is your recording</Para>
             <AudioElement id="recording" src={analysis.recordingURL} bgColor={analysis.bgColor}/>
@@ -200,7 +200,7 @@ function TempoComparision({
     bgColor  : string
 }) { 
     return (<div style={{color : bgColor}}>
-            <h2 style={{fontSize: "3vh"}}><i>So you sung at a tempo of <b>{recTempo} BPS</b> while the singer sung at a frequency of <b>{vocTempo} BPS</b></i></h2>
+            <h2 style={{fontSize: "3vh"}}><i>So you sung at a tempo of <b>{recTempo} BPS</b> while the singer sung at a tempo of <b>{vocTempo} BPS</b></i></h2>
             <br/>
             <p className="iamsocool px-4 pb-32 mb-32"><b>In-case you can sing at the correct tempo, consider relaxing and take a big breath before you sing</b><br/>
             If you wanna work on you dragging or rushing the lyrics, you can consider the following points:<br/>
